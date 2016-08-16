@@ -50,7 +50,7 @@ node default {
      group => 'root',
      mode => '0644',
      content => "Today I learned Puppet Fundamentals!!! Cool.\n",
-}
+  }
   
   
 }
