@@ -43,3 +43,5 @@ class nginx  {
     enable => true,
   }
 }
+
+}
