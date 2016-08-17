@@ -66,5 +66,5 @@ node default {
   include users
   
   # Lab 9.3
-  include skel
+  include skeleton
 }
