@@ -62,4 +62,6 @@ node default {
     ip => '127.0.0.1',
   }
   
+  # Lab 9.2
+  include users
 }
