@@ -41,4 +41,4 @@ ini_setting { 'random ordering':
 #Lab 11.1
 include memcached
 
-}
+
