@@ -64,4 +64,7 @@ node default {
   
   # Lab 9.2
   include users
+  
+  # Lab 9.3
+  include skel
 }
