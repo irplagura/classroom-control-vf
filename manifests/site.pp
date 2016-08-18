@@ -47,9 +47,8 @@ node default {
   #   class { 'my_class': }
   if $::is_virtual  {    
       $vmname = capitalize($::virtual) 
-      $version = 
-      notify { "This is a ${vmname} virtual machine.": }  
-      notice { "This is a ${vmname} virtual machine.": }  
+      notify { "This is a ${vmname} virtual machine. Using notify": }  
+      notice { "This is a ${vmname} virtual machine. Using notice": }  
   } 
 }
 
