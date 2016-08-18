@@ -1,19 +1,48 @@
 class nginx  {
+  case $::osfamily {
+    'redhat','debian': {
+      $package = 'nginx'
+      $owner = 'root'
+      $group = 'root'
+      $docroot = '/var/www'
+      $confdir = '/etc/nginx'
+      $logdir = '/var/log/nginx'
+    }
+    'windows':{
+      $package ='nginx-service'
+      $owner = 'Administrator'
+      $group = 'Administrators'
+      $confdir = 'C:/ProgramData/nginx' 
+      $logdir  = 'C:/ProgramData/nginx/logs'
+    }
+    default :{
+      fail("Module ${module_name} is not supported on ${::osfamily}")
+    }
+  }
+
+ # user the service will run as. Used in the nginx.conf.erb template 
+ $user = $::osfamily ? {
+   'redhat' => 'nginx',
+   'debian' => 'www-data',
+   'windows' => 'nobody',
+ }
+
   File {
     ensure => file,
-    owner => 'root',
-    group => 'root',
+    owner => $owner,
+    group => $group,
     mode => '0664',
   }
   
-  $docroot = '/var/www'
-  $confdir = '/etc/nginx'
+  # this is now defined in case statement
+  # $docroot = '/var/www'
+  # $confdir = '/etc/nginx'
   
-  package {'nginx':
+  package { $package :
     ensure => present,
   }
   
-  file { $docroot :
+  file { $docroot : "${confdir}/conf.d"
     ensure => directory,
     }
   
@@ -22,21 +51,30 @@ class nginx  {
   }
   
   file { "${confdir}nginx.conf":
-    source => 'puppet:///modules/nginx/nginx.conf',
-    require => Package['nginx'],
+    ensure => file,
+    content => template('nginx/nginx.conf.erb'), 
+    # source => 'puppet:///modules/nginx/nginx.conf',
+    # require => Package['nginx'],
     notify => Service['nginx'],
   }
   
   file { "$confdir/conf.d":
     ensure => directory,
+    # We'll use ERB now instead of source template
     # source  => 'puppet:///modules/nginx/nginx.conf',    
-    require => Package['nginx'],    
+    # Already defined nginx ensure present as above
+    #require => Package['nginx'],
+    content => template('nginx/nginx.conf.erb'),
     notify  => Service['nginx'], 
     }
     
   file { "${confdir}/conf.d/default.conf":
-    source => 'puppet:///modules/nginx/default.conf',
-    require => Package['nginx'],
+    ensure => file,
+    # We'll use ERB now instead of source template
+    # source => 'puppet:///modules/nginx/default.conf',
+    # Already defined nginx ensure present as above
+    # require => Package['nginx'],
+    content => template('nginx/default.conf.erb'),
     notify => Service['nginx'],
   }
   
