@@ -48,7 +48,6 @@ node default {
   if $::is_virtual  {    
       $vmname = capitalize($::virtual) 
       notify { "This is a ${vmname} virtual machine. Using notify": }  
-      notice { "This is a ${vmname} virtual machine. Using notice": }  
   } 
 }
 
