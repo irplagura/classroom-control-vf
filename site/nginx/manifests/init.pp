@@ -7,7 +7,7 @@ class nginx  {
   }
   
   $docroot = '/var/www'
-  $confdir = '/etc/nginix'
+  $confdir = '/etc/nginx'
   
   package {'nginx':
     ensure => present,
