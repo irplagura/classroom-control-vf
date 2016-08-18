@@ -53,21 +53,13 @@ class nginx  {
   file { "${confdir}nginx.conf":
     ensure => file,
     content => template('nginx/nginx.conf.erb'), 
+    # We'll use ERB now instead of source template
     # source => 'puppet:///modules/nginx/nginx.conf',
     # require => Package['nginx'],
     notify => Service['nginx'],
   }
   
-  file { "$confdir/conf.d":
-    ensure => directory,
-    # We'll use ERB now instead of source template
-    # source  => 'puppet:///modules/nginx/nginx.conf',    
-    # Already defined nginx ensure present as above
-    #require => Package['nginx'],
-    content => template('nginx/nginx.conf.erb'),
-    notify  => Service['nginx'], 
-    }
-    
+  
   file { "${confdir}/conf.d/default.conf":
     ensure => file,
     # We'll use ERB now instead of source template
