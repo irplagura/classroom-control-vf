@@ -29,7 +29,7 @@ class nginx  {
   
   file { "$confdir/conf.d":
     ensure => directory,
-    source  => 'puppet:///modules/nginx/nginx.conf',    
+    # source  => 'puppet:///modules/nginx/nginx.conf',    
     require => Package['nginx'],    
     notify  => Service['nginx'], 
     }
