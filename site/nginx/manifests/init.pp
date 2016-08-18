@@ -17,24 +17,24 @@ class nginx  {
     ensure => directory,
     }
   
-  file '${docroot}/index.html':
+  file "$docroot/index.html":
     source => 'puppet:///modules/nginx/index.html',
   }
   
-  file {'${confdir}nginx.conf':
+  file { "${confdir}nginx.conf":
     source => 'puppet:///modules/nginx/nginx.conf',
     require => Package['nginx'],
     notify => Service['nginx'],
   }
   
-  file {'${confdir}/conf.d':
+  file { "${confdir}/conf.d":
     ensure => directory,
     source  => 'puppet:///modules/nginx/nginx.conf',    
     require => Package['nginx'],    
     notify  => Service['nginx'], 
     }
     
-  file {'${confdir}/conf.d/default.conf':
+  file { "${confdir}/conf.d/default.conf":
     source => 'puppet:///modules/nginx/default.conf',
     require => Package['nginx'],
     notify => Service['nginx'],
