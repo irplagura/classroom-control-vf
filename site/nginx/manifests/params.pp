@@ -21,6 +21,7 @@ class nginx::params {
     }
   }
   
+  
   $user = $::osfamily ? {
     'redhat': => 'nginx',
     'debian': => 'www-data',
