@@ -28,4 +28,4 @@ class nginx::params {
     'windows' => 'nobody',
   }
   
-  }
+ }
