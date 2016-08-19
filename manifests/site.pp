@@ -55,5 +55,4 @@ node default {
   notify { $message: }
 }
 
-$message = hiera('message')
-notify { $message: }
+
