@@ -51,3 +51,5 @@ node default {
   } 
 }
 
+notice "(hiera('message'))"
+
