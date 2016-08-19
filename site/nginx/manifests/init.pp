@@ -1,4 +1,7 @@
-class nginx  {
+class nginx  (
+  $root = undef,
+) {
+  
   case $::osfamily {
     'redhat','debian': {
       $package = 'nginx'
@@ -25,6 +28,12 @@ class nginx  {
    'redhat' => 'nginx',
    'debian' => 'www-data',
    'windows' => 'nobody',
+ }
+
+ # Using selector,  if root isn't set, then failback to platform default
+ $docroot = $root ? {
+   undef = $default_docroot,
+   default = $root,
  }
 
   File {
