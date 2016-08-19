@@ -7,7 +7,7 @@ class nginx  (
       $package = 'nginx'
       $owner = 'root'
       $group = 'root'
-      $docroot = '/var/www'
+      $default_docroot = '/var/www'
       $confdir = '/etc/nginx'
       $logdir = '/var/log/nginx'
     }
