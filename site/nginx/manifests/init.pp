@@ -1,6 +1,7 @@
 class nginx  (
   $root = undef,
-) {
+  
+) inherits nginx::params {
   
   case $::osfamily {
     'redhat','debian': {
