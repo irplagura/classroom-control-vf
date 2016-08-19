@@ -32,8 +32,8 @@ class nginx  (
 
  # Using selector,  if root isn't set, then failback to platform default
  $docroot = $root ? {
-   undef = $default_docroot,
-   default = $root,
+   undef => $default_docroot,
+   default => $root,
  }
 
   File {
