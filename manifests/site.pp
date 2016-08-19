@@ -50,6 +50,7 @@ node default {
       notify { "This is a ${vmname} virtual machine. Using notify": }  
   } 
   
+  #Lab 17.1 Test Hiera function
   $message = hiera('message')
   notify { $message: }
 }
