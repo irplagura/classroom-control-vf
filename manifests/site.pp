@@ -55,6 +55,6 @@ node default {
   notify { $message: }
 }
 
-class { 'nginx': }
+# class { 'nginx': }
 
 
